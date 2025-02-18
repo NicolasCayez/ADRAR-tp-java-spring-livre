@@ -31,29 +31,29 @@ public class BookController {
     return bookService.getAllBooks();
   }
 
-  @GetMapping("/book")
-  public Optional<Book> getBook(@RequestParam Long id) {
-    return bookService.getBookById(id);
+  @GetMapping("/book/{id}")
+  public Optional<Book> getBook(@PathVariable String id) {
+    return bookService.getBookById(Long.valueOf(id));
   }
 
-  @PostMapping("addbook")
+  @PostMapping("book")
   public void addBook(@RequestBody Book book){
     bookService.addBook(book);
   }
   
-  @PatchMapping("updatebook")
+  @PatchMapping("book")
   public void updateBook(@RequestBody Book book){
     bookService.addBook(book);
   }
 
-  @PutMapping("replacebook/{id}")
-  // public void replaceBook(@PathVariable String id, @RequestBody Book book) {
-  //   book.setId(Long.valueOf(id));
-  //   bookService.replaceBook(book);
+  @PutMapping("book/{id}")
+  public void replaceBook(@PathVariable String id, @RequestBody Book book) {
+    book.setId(Long.valueOf(id));
+    bookService.replaceBook(book);
   }
 
-  @DeleteMapping("removebook")
-  public void removeBook(@RequestParam Long id){
-    bookService.removeBook(id);
+  @DeleteMapping("book/{id}")
+  public void removeBook(@PathVariable String id){
+    bookService.removeBook(Long.valueOf(id));
   }
 }
